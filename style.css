@@ -66,6 +66,7 @@ textarea{
     font-family: fangsong;
     line-height: 30px;
     resize: none;
+    overflow: hidden;
 }
 
 .comment-text-input {
