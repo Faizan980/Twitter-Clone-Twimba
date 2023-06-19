@@ -1,5 +1,9 @@
-import { tweetsData as remoteTweets} from "/data.js"
-import { v4 as uuidv4 } from 'https://jspm.dev/uuid';
+import {
+    tweetsData as remoteTweets
+} from "/data.js"
+import {
+    v4 as uuidv4
+} from 'https://jspm.dev/uuid';
 
 let tweetInput = document.getElementById('tweet-Input')
 
@@ -10,31 +14,25 @@ let tweetsData = JSON.parse(localStorage.getItem('tweets')) || remoteTweets;
 document.addEventListener('click', function(e) {
     if (e.target.dataset.like) {
         handleLikeClick(e.target.dataset.like)
-    } 
-    else if (e.target.dataset.retweet) {
+    } else if (e.target.dataset.retweet) {
         handleRetweetClick(e.target.dataset.retweet)
-    }
-    else if (e.target.dataset.reply) {
+    } else if (e.target.dataset.reply) {
         handleReplyClick(e.target.dataset.reply)
-    }
-    else if (e.target.dataset.replybtn) {
+    } else if (e.target.dataset.replybtn) {
         handleReplyClickBtn(e.target.dataset.replybtn)
-    }
-    else if(e.target.id === 'tweet-btn'){
+    } else if (e.target.id === 'tweet-btn') {
         handleTweetBtnClick()
-    }
-    else if(e.target.dataset.delete) {
+    } else if (e.target.dataset.delete) {
         handleDeleteBtn(e.target.dataset.delete)
     }
 
     // Setting up local Storage
     localStorage.setItem('tweets', JSON.stringify(tweetsData));
-
 })
 
-// handle click on Reply button and render reply object
+// handle clicks on Reply button and render reply object
 function handleReplyClickBtn(tweetId) {
-    const targetTweetObject = tweetsData.filter(function(tweet) {
+    let targetTweetObject = tweetsData.filter(function(tweet) {
         return tweet.uuid === tweetId
     })[0]
     const tweetReplyInput = document.getElementById(`reply-input-${tweetId}`)
@@ -47,19 +45,22 @@ function handleReplyClickBtn(tweetId) {
         })
     }
     render()
+    document.getElementById(`replies-${tweetId}`).classList.remove('hidden')
 }
 
 // handle delete button and delete an object from local storage
 function handleDeleteBtn(tweetId) {
-    let targetTweetIndex = tweetsData.findIndex(tweet => tweet.uuid === tweetId)
-    if (targetTweetIndex >= 0 || targetTweetIndex === tweetId) {
-        tweetsData.splice(targetTweetIndex, 1)
+    let targetTweetObject = tweetsData.findIndex(tweet => tweet.uuid === tweetId)
+
+    if (targetTweetObject >= 0) {
+        tweetsData.splice(targetTweetObject, 1)
         render()
     }
 }
 
 // handle tweet button to render new tweet on document
 function handleTweetBtnClick() {
+
     if (tweetInput.value) {
         tweetsData.unshift({
             handle: `@Scrimba 💰`,
@@ -73,6 +74,7 @@ function handleTweetBtnClick() {
             uuid: uuidv4(),
         })
     }
+    tweetInput.value = ''
     render()
 }
 
@@ -100,12 +102,13 @@ function handleRetweetClick(tweetId) {
 
     if (targetTweetObject.isRetweeted) {
         targetTweetObject.retweets--
-    } 
-    
+    }
+
     if (!targetTweetObject.isRetweeted) {
         targetTweetObject.retweets++
     }
     targetTweetObject.isRetweeted = !targetTweetObject.isRetweeted
+
     render()
 }
 
@@ -191,8 +194,8 @@ function getFeedHtml() {
                 class="comment-text-input"
                 id="reply-input-${tweet.uuid}"
             ></textarea>
+            <button type="button" data-replybtn="${tweet.uuid}" class="comment-btn">Send</button>
         </div>
-        <button data-replybtn="${tweet.uuid}" class="comment-btn">Send</button>
         ${repliesHtml}
 </div>
         `
