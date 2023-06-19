@@ -17,11 +17,11 @@ i{
     cursor: pointer;
 }
 
-.liked{
-    color: red;
+i:hover {
+    font-size: 17px;
 }
 
-.fa-heart:hover {
+.liked{
     color: red;
 }
 
@@ -29,20 +29,12 @@ i{
   color: limegreen;
 }
 
-i {
-    color: #999;
-}
-
-.liked:hover{
-    color: red;
-}
-
-.fa-retweet:hover {
-    color: limegreen;
-}
-
 .fa-trash:hover {
     color: red;
+}
+
+i {
+    color: #999;
 }
 
 /* layout */
@@ -70,27 +62,28 @@ textarea{
     margin: 0 0 20px 0;
     height: 60px;
     width: 100%;
-    font-size: 14px;
+    font-size: 20px;
     font-family: fangsong;
     line-height: 30px;
     resize: none;
 }
 
 .comment-text-input {
-    border: none;
-    padding: 10px;
+    border: 1px solid grey;
+    padding: 8px;
     margin: 0 0 20px 0;
     height: 25px;
-    width: 80%;
+    width: 75%;
+    border-radius: 5px;
     font-size: 15px;
     font-family: fangsong;
-    line-height: 30px;
+    line-height: 20px;
     resize: none;
     overflow: hidden;
 }
 
 button{
-    background-color: #1DA1F2;
+    background-color: #0887d6;
     border: none;
     color: white;
     padding: 10px 19px;
@@ -102,12 +95,14 @@ button{
 }
 
 button:hover {
-    background-color: #4baae5;
+    background-color: #4dafed;
+}
+button:active {
+    box-shadow: 1px 1px 2px 1px rgba(0,0,0,0.49);
 }
 
 .comment-btn {
-    display: block;
-    background-color: #1DA1F2;
+    background-color: #0887d6;
     border: none;
     color: white;
     padding: 15px 13px;
@@ -119,7 +114,12 @@ button:hover {
     font-weight: 600;
 }
 
-
+.comment-btn:hover {
+    background-color: #4dafed;
+}
+.comment-btn:active {
+    box-shadow: 1px 1px 2px 1px rgba(0,0,0,0.49);
+}
 
 /* tweet */
 
@@ -145,8 +145,8 @@ button:hover {
     display: flex;
     font-size: 13px;
     justify-content: space-between;
-    gap: 18px;
     width: 160px;
+    gap: 20px;
 }
 
 .tweet-detail{
@@ -183,7 +183,7 @@ button:hover {
 
 .tweet-text{
     width: 207px;
-    font-size: 12px;
+    font-size: 14px;
     line-height: 20px;
 }
 
